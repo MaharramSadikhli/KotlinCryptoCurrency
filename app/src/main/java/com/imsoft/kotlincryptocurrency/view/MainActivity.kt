@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.imsoft.kotlincryptocurrency.R
 import com.imsoft.kotlincryptocurrency.adapter.CryptoAdapter
 import com.imsoft.kotlincryptocurrency.databinding.ActivityMainBinding
 import com.imsoft.kotlincryptocurrency.model.CryptoCurrencyModel
 import com.imsoft.kotlincryptocurrency.service.CryptoCurrencyAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
     private lateinit var binding: ActivityMainBinding
     private var cryptoCurrencyModels: ArrayList<CryptoCurrencyModel>? = null
     private lateinit var cryptoAdapter: CryptoAdapter
+    private lateinit var compositeDisposable: CompositeDisposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
         setContentView(binding.root)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+
+        compositeDisposable = CompositeDisposable()
 
         loadData()
     }
@@ -41,34 +43,36 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
             .build()
 
         val service = retrofit.create(CryptoCurrencyAPI::class.java)
-        val call = service.getData()
 
-        call.enqueue(object: Callback<List<CryptoCurrencyModel>> {
-            override fun onResponse(
-                call: Call<List<CryptoCurrencyModel>>,
-                response: Response<List<CryptoCurrencyModel>>
-            ) {
+        compositeDisposable
+            .add(
+                service
+                    .getData()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            )
 
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        cryptoCurrencyModels = ArrayList(it)
 
-                        cryptoCurrencyModels?.let { crypto ->
-                            cryptoAdapter = CryptoAdapter(crypto, this@MainActivity)
-                            binding.recyclerView.adapter = cryptoAdapter
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<List<CryptoCurrencyModel>>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
     }
 
     override fun onRowClick(cryptoCurrencyModel: CryptoCurrencyModel) {
         Toast.makeText(this@MainActivity, "${cryptoCurrencyModel.price} $", Toast.LENGTH_LONG).show()
+    }
+
+    private fun handlerResponse(cryptoList: List<CryptoCurrencyModel>) {
+        cryptoCurrencyModels = ArrayList(cryptoList)
+
+        cryptoCurrencyModels?.let {
+            cryptoAdapter = CryptoAdapter(it, this@MainActivity)
+            binding.recyclerView.adapter = cryptoAdapter
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        compositeDisposable.clear()
     }
 }

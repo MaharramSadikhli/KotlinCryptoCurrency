@@ -1,5 +1,5 @@
 val retrofitVersion = "2.9.0"
-val rxJavaVersion = "3.0.0"
+val rxJavaVersion = "2.1.1"
 
 plugins {
     id("com.android.application")
@@ -60,7 +60,7 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
 
     // rxJava
-    implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
-    implementation("io.reactivex.rxjava3:rxandroid:$rxJavaVersion")
+    implementation("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
+    implementation("io.reactivex.rxjava2:rxandroid:$rxJavaVersion")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 }

@@ -1,6 +1,7 @@
 package com.imsoft.kotlincryptocurrency.service
 
 import com.imsoft.kotlincryptocurrency.model.CryptoCurrencyModel
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,6 +11,9 @@ interface CryptoCurrencyAPI {
     // MaharramSadikhli/APIs/main/cryptocurrencyapi.json
 
     @GET("MaharramSadikhli/APIs/main/cryptocurrencyapi.json")
-    fun getData(): Call<List<CryptoCurrencyModel>>
+    fun getData(): Observable<List<CryptoCurrencyModel>>
+
+
+    //fun getData(): Call<List<CryptoCurrencyModel>>
 
 }
