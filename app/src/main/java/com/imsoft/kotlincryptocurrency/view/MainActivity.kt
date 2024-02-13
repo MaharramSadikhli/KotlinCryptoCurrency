@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
@@ -36,28 +37,28 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
 
     private fun loadData() {
 
-        val retrofit = Retrofit
-            .Builder()
+        val retrofit = Retrofit.Builder()
             .baseUrl(baseUrlApi)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
         val service = retrofit.create(CryptoCurrencyAPI::class.java)
 
-        compositeDisposable
-            .add(
+        compositeDisposable.add(
                 service
                     .getData()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
+                    .subscribe(this::handlerResponse)
             )
 
 
     }
 
     override fun onRowClick(cryptoCurrencyModel: CryptoCurrencyModel) {
-        Toast.makeText(this@MainActivity, "${cryptoCurrencyModel.price} $", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "${cryptoCurrencyModel.price} $", Toast.LENGTH_LONG)
+            .show()
     }
 
     private fun handlerResponse(cryptoList: List<CryptoCurrencyModel>) {
