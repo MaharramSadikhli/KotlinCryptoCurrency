@@ -1,0 +1,230 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 268435456 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3600), pid=4052, tid=8968
+#
+# JRE version:  (21.0.2+13) (build )
+# Java VM: OpenJDK 64-Bit Server VM (21.0.2+13-58, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler @C:\Users\User\AndroidStudioProjects\KotlinCryptoCurrency\app\build\20240213_13137251256851450201.compiler.options
+
+Host: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz, 4 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.3636)
+Time: Tue Feb 13 03:02:36 2024 Azerbaijan Standard Time elapsed time: 0.015238 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000027caf9f13e0):  JavaThread "Unknown thread" [_thread_in_vm, id=8968, stack(0x0000008ea6b00000,0x0000008ea6c00000) (1024K)]
+
+Stack: [0x0000008ea6b00000,0x0000008ea6c00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6cade9]
+V  [jvm.dll+0x8569c1]
+V  [jvm.dll+0x858d2e]
+V  [jvm.dll+0x859413]
+V  [jvm.dll+0x280e56]
+V  [jvm.dll+0x6c74d5]
+V  [jvm.dll+0x6bbeca]
+V  [jvm.dll+0x355bca]
+V  [jvm.dll+0x35d816]
+V  [jvm.dll+0x3ae67e]
+V  [jvm.dll+0x3ae928]
+V  [jvm.dll+0x3295dc]
+V  [jvm.dll+0x32a16b]
+V  [jvm.dll+0x81efa9]
+V  [jvm.dll+0x3bba01]
+V  [jvm.dll+0x807928]
+V  [jvm.dll+0x44f50e]
+V  [jvm.dll+0x450e11]
+C  [jli.dll+0x52a3]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17344]
+C  [ntdll.dll+0x526b1]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffc55d2bb88, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x0000027cb1bf0e90 WorkerThread "GC Thread#0"                     [id=11672, stack(0x0000008ea6c00000,0x0000008ea6d00000) (1024K)]
+  0x0000027cb1c036c0 ConcurrentGCThread "G1 Main Marker"            [id=2064, stack(0x0000008ea6d00000,0x0000008ea6e00000) (1024K)]
+  0x0000027cb1c06d70 WorkerThread "G1 Conc#0"                       [id=3248, stack(0x0000008ea6e00000,0x0000008ea6f00000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc5549c6a7]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffc55d9ce68] Heap_lock - owner thread: 0x0000027caf9f13e0
+
+Heap address: 0x0000000701800000, size: 4072 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 16 size 48 Howl #buckets 8 coarsen threshold 3686 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 4096
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000701800000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc558839f9]
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.007 Loaded shared library C:\Users\User\.jdks\openjdk-21.0.2\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff7b34b0000 - 0x00007ff7b34be000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\java.exe
+0x00007ffcbd0f0000 - 0x00007ffcbd2e8000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffcbc100000 - 0x00007ffcbc1bd000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffcba810000 - 0x00007ffcbab06000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffcbac20000 - 0x00007ffcbad20000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffc7fd20000 - 0x00007ffc7fd38000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\jli.dll
+0x00007ffc851a0000 - 0x00007ffc851bb000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\VCRUNTIME140.dll
+0x00007ffcbc3c0000 - 0x00007ffcbc55e000 	C:\Windows\System32\USER32.dll
+0x00007ffcbae00000 - 0x00007ffcbae22000 	C:\Windows\System32\win32u.dll
+0x00007ffcab050000 - 0x00007ffcab2ea000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.3636_none_60b6a03d71f818d5\COMCTL32.dll
+0x00007ffcbbf30000 - 0x00007ffcbbf5c000 	C:\Windows\System32\GDI32.dll
+0x00007ffcbbd70000 - 0x00007ffcbbe0e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffcbaf90000 - 0x00007ffcbb0aa000 	C:\Windows\System32\gdi32full.dll
+0x00007ffcbab10000 - 0x00007ffcbabad000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffcbc1c0000 - 0x00007ffcbc1f0000 	C:\Windows\System32\IMM32.DLL
+0x00007ffca8590000 - 0x00007ffca859c000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\vcruntime140_1.dll
+0x00007ffc6e880000 - 0x00007ffc6e90e000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\msvcp140.dll
+0x00007ffc55160000 - 0x00007ffc55e77000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\server\jvm.dll
+0x00007ffcbcec0000 - 0x00007ffcbcf73000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffcbbcd0000 - 0x00007ffcbbd6f000 	C:\Windows\System32\sechost.dll
+0x00007ffcbcbd0000 - 0x00007ffcbccf6000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffcbad20000 - 0x00007ffcbad47000 	C:\Windows\System32\bcrypt.dll
+0x00007ffcbbc60000 - 0x00007ffcbbccb000 	C:\Windows\System32\WS2_32.dll
+0x00007ffcba570000 - 0x00007ffcba5bb000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffca5b90000 - 0x00007ffca5bb7000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffcb0100000 - 0x00007ffcb010a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffcba550000 - 0x00007ffcba562000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffcb8670000 - 0x00007ffcb8682000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffca6f10000 - 0x00007ffca6f1a000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\jimage.dll
+0x00007ffca5dc0000 - 0x00007ffca5fa4000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffca4b20000 - 0x00007ffca4b54000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffcbb0b0000 - 0x00007ffcbb132000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffc7fc20000 - 0x00007ffc7fc3f000 	C:\Users\User\.jdks\openjdk-21.0.2\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\User\.jdks\openjdk-21.0.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.3636_none_60b6a03d71f818d5;C:\Users\User\.jdks\openjdk-21.0.2\bin\server
+
+VM Arguments:
+java_command: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler @C:\Users\User\AndroidStudioProjects\KotlinCryptoCurrency\app\build\20240213_13137251256851450201.compiler.options
+java_class_path (initial): C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compiler-embeddable\1.9.22\9cd4dc7773cf2a99ecd961a88fbbc9a2da3fb5e1\kotlin-compiler-embeddable-1.9.22.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.9.22\d6c44cd08d8f3f9bece8101216dbe6553365c6e3\kotlin-stdlib-1.9.22.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-script-runtime\1.9.22\f8139a46fc677ec9badc49ae954392f4f5e7e7c7\kotlin-script-runtime-1.9.22.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\1.6.10\1cbe9c92c12a94eea200d23c2bbaedaf3daf5132\kotlin-reflect-1.6.10.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-daemon-embeddable\1.9.22\20e2c5df715f3240c765cfc222530e2796542021\kotlin-daemon-embeddable-1.9.22.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains.intellij.deps\trove4j\1.0.20200330\3afb14d5f9ceb459d724e907a21145e8ff394f02\trove4j-1.0.20200330.jar;C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 268435456                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4269801472                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122912730                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4269801472                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:\Users\User\.jdks\openjdk-21.0.2
+PATH=C:\Program Files\Eclipse Adoptium\jdk-21.0.2.13-hotspot\bin;C:\Python312\Scripts\;C:\Python312\;C:\Program Files\Microsoft\jdk-11.0.18.10-hotspot\bin;C:\Program Files (x86)\IntelSWTools\system_studio_2020\OpenCL\sdk\bin\x64;C:\Program Files (x86)\IntelSWTools\system_studio_2020\OpenCL\sdk\bin\x86;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Python39\Scripts\;C:\Program Files\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Redis\;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\jdk-20.0.1\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Gradle\gradle-8.5\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\User\anaconda3;C:\Users\User\anaconda3\Library\mingw-w64\bin;C:\Users\User\anaconda3\Library\usr\bin;C:\Users\User\anaconda3\Library\bin;C:\Users\User\anaconda3\Scripts;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Azure Data Studio\bin;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.1\bin;;C:\Users\User\.dotnet\tools;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Users\User\AppData\Roaming\npm
+USERNAME=User
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+TMP=C:\Users\User\AppData\Local\Temp
+TEMP=C:\Users\User\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.3636)
+OS uptime: 1 days 9:19 hours
+
+CPU: total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 60 stepping 3 microcode 0x27, cx8, cmov, fxsr, ht, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, fma, vzeroupper, clflush, rdtscp, f16c
+Processor Information for all 4 processors :
+  Max Mhz: 2494, Current Mhz: 2494, Mhz Limit: 2494
+
+Memory: 4k page, system-wide physical 16281M (1111M free)
+TotalPageFile size 16281M (AvailPageFile size 107M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 52M, peak: 308M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.2+13-58) for windows-amd64 JRE (21.0.2+13-58), built on 2024-01-05T18:32:24Z by "mach5one" with MS VC++ 17.1 (VS2022)
+
+END.
