@@ -12,9 +12,8 @@ interface CryptoCurrencyAPI {
     // MaharramSadikhli/APIs/main/cryptocurrencyapi.json
 
     @GET("MaharramSadikhli/APIs/main/cryptocurrencyapi.json")
-    suspend fun getData(): Response<List<CryptoCurrencyModel>>
+    fun getData(): Observable<List<CryptoCurrencyModel>>
 
-    //fun getData(): Observable<List<CryptoCurrencyModel>>
     //fun getData(): Call<List<CryptoCurrencyModel>>
 
 }
