@@ -11,11 +11,6 @@ import com.imsoft.kotlincryptocurrency.service.CryptoCurrencyAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,7 +22,6 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
     private var cryptoCurrencyModels: ArrayList<CryptoCurrencyModel>? = null
     private lateinit var cryptoAdapter: CryptoAdapter
     private lateinit var compositeDisposable: CompositeDisposable
-    private lateinit var job: Job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +31,6 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
         binding.recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
 
         compositeDisposable = CompositeDisposable()
-
-        job = Job()
 
         loadData()
     }
@@ -53,29 +45,13 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
 
         val service = retrofit.create(CryptoCurrencyAPI::class.java)
 
-        job = CoroutineScope(Dispatchers.IO)
-            .launch {
-                val response = service.getData()
-
-                withContext(Dispatchers.Main) {
-
-                    if (response.isSuccessful) {
-
-                        response.body()?.let {
-
-                            cryptoCurrencyModels = ArrayList(it)
-
-                            cryptoCurrencyModels?.let {
-                                cryptoAdapter = CryptoAdapter(it, this@MainActivity)
-                                binding.recyclerView.adapter = cryptoAdapter
-                            }
-
-                        }
-
-                    }
-
-                }
-            }
+        compositeDisposable.add(
+            service
+                .getData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handlerResponse)
+        )
 
 
     }
@@ -85,10 +61,19 @@ class MainActivity : AppCompatActivity(), CryptoAdapter.Listener {
             .show()
     }
 
+    private fun handlerResponse(cryptoList: List<CryptoCurrencyModel>) {
+        cryptoCurrencyModels = ArrayList(cryptoList)
+
+        cryptoCurrencyModels?.let {
+            cryptoAdapter = CryptoAdapter(it, this@MainActivity)
+            binding.recyclerView.adapter = cryptoAdapter
+        }
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()
 
-        job.cancel()
+        compositeDisposable.clear()
     }
 }
